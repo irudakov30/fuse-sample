@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+    http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+    <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
+        <route>
+            <from uri="cxf:bean:myService"/>
+            <convertBodyTo type="String"/>
+            <to uri="log:######## After my service invoke"/>
+            <to uri="activemq:queue:my.service.echo.log" pattern="InOnly"/>
+            <to uri="log:######## After active mq invoke"/>
+        </route>
+    </camel:camelContext>
+
+</beans>
