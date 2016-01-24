@@ -12,20 +12,22 @@
     <osgi:reference id="echoService" bean-name="echoService" interface="com.discovery.service.ifc.EchoService"/>
 
     <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
-        <route>
+        <propertyPlaceholder id="camePlaceHolder" location="ref:configProps"/>
+
+        <route id="mainRoute">
             <from uri="cxf:bean:myService"/>
 
             <convertBodyTo type="String"/>
 
-            <to uri="log:######## After my service invoke"/>
+            <to uri="log:######## After my service invoke?{{conf.log.options}}"/>
 
             <to uri="bean:echoService?method=echo"/>
 
-            <to uri="log:######## After Echo service invoke"/>
+            <to uri="log:######## After Echo service invoke?{{conf.log.options}}"/>
 
             <to uri="activemq:queue:my.service.echo.log" pattern="InOnly"/>
 
-            <to uri="log:######## After active mq invoke"/>
+            <to uri="log:######## After active mq invoke?{{conf.log.options}}"/>
         </route>
     </camel:camelContext>
 
