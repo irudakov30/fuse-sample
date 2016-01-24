@@ -11,6 +11,7 @@
         <module>amq-connection-pool</module>
         <module>echo-service-ifc</module>
         <module>echo-service-impl</module>
+        <module>main-route</module>
     </modules>
     <packaging>pom</packaging>
 

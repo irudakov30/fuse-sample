@@ -1,4 +1,4 @@
-package com.discover.ws;
+package ws;
 
 import javax.jws.WebService;
 
