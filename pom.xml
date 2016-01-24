@@ -7,7 +7,12 @@
     <groupId>com.discover</groupId>
     <artifactId>osgi-ws</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>bundle</packaging>
+    <modules>
+        <module>amq-connection-pool</module>
+        <module>echo-service-ifc</module>
+        <module>echo-service-impl</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>[MY] OSGI WS</name>
 
@@ -15,7 +20,6 @@
         <camel.version>2.10.0</camel.version>
         <commons-logging.version>1.1.3</commons-logging.version>
         <spring.version>3.2.3.RELEASE</spring.version>
-        <!--<cxf.version>2.6.0</cxf.version>-->
         <cxf.version>3.0.4.redhat-621084</cxf.version>
         <osgi.core.version>4.3.1</osgi.core.version>
         <felix.bundle.plugin.version>2.3.7</felix.bundle.plugin.version>
