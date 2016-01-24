@@ -9,12 +9,22 @@
     http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
     http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
+    <osgi:reference id="echoService" bean-name="echoService" interface="com.discovery.service.ifc.EchoService"/>
+
     <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
             <from uri="cxf:bean:myService"/>
+
             <convertBodyTo type="String"/>
+
             <to uri="log:######## After my service invoke"/>
+
+            <to uri="bean:echoService?method=echo"/>
+
+            <to uri="log:######## After Echo service invoke"/>
+
             <to uri="activemq:queue:my.service.echo.log" pattern="InOnly"/>
+
             <to uri="log:######## After active mq invoke"/>
         </route>
     </camel:camelContext>

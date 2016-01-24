@@ -11,10 +11,18 @@
 
     <artifactId>main-route</artifactId>
     <packaging>bundle</packaging>
-
     <name>[MY] Main route</name>
 
     <properties>
         <osgi.configName>${project.groupId}.MainRoute</osgi.configName>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.discover</groupId>
+            <artifactId>echo-service-ifc</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
