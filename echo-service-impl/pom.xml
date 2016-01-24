@@ -10,6 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>echo-service-impl</artifactId>
+    <packaging>bundle</packaging>
+    <name>[MY] Echo service</name>
 
+    <properties>
+        <osgi.configName>${project.groupId}.EchoService</osgi.configName>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.discover</groupId>
+            <artifactId>echo-service-ifc</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 </project>
