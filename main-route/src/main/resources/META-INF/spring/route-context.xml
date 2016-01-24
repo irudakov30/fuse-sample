@@ -11,23 +11,23 @@
 
     <osgi:reference id="echoService" bean-name="echoService" interface="com.discovery.service.ifc.EchoService"/>
 
-    <camel:camelContext xmlns="http://camel.apache.org/schema/spring">
+    <camel:camelContext xmlns="http://camel.apache.org/schema/spring" id="MainRouteContext">
         <propertyPlaceholder id="camePlaceHolder" location="ref:configProps"/>
 
         <route id="mainRoute">
-            <from uri="cxf:bean:myService"/>
+            <from uri="cxf:bean:myService" id="myWebServiceStep"/>
 
-            <convertBodyTo type="String"/>
+            <convertBodyTo type="String" id="convertBodyToStringStep"/>
 
-            <to uri="log:######## After my service invoke?{{conf.log.options}}"/>
+            <to uri="log:######## After my service invoke?{{conf.log.options}}" id="log1Step"/>
 
-            <to uri="bean:echoService?method=echo"/>
+            <to uri="bean:echoService?method=echo" id="echoServiceStep"/>
 
-            <to uri="log:######## After Echo service invoke?{{conf.log.options}}"/>
+            <to uri="log:######## After Echo service invoke?{{conf.log.options}}" id="log2Step"/>
 
-            <to uri="activemq:queue:my.service.echo.log" pattern="InOnly"/>
+            <to uri="activemq:queue:my.service.echo.log" pattern="InOnly" id="activeMQStep"/>
 
-            <to uri="log:######## After active mq invoke?{{conf.log.options}}"/>
+            <to uri="log:######## After active mq invoke?{{conf.log.options}}" id="log3Step"/>
         </route>
     </camel:camelContext>
 
